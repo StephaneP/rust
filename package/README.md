@@ -4,7 +4,7 @@ Community-maintained package to support using [Rust](https://www.rust-lang.org/)
 
 ## Usage
 
-First, you'll need a `vercel.json` file to specify the runtime for your function `api/user.rs`:
+First, you'll need a `vercel.json` file in your project:
 
 ```json
 {
@@ -16,11 +16,7 @@ First, you'll need a `vercel.json` file to specify the runtime for your function
 }
 ```
 
-**Note:** A Vercel Function will be created for every file that matches `api/**/*.rs`.
-
-**Note:** `Cargo.toml` must exist on the same level as the `.rs` files.
-
-Next, you can create a new Function `api/user.rs`:
+A Vercel Function will be created for every file that matches `api/**/*.rs`. Next, you can create a new Function `api/user.rs`:
 
 ```rust
 use http::{StatusCode};
@@ -61,11 +57,31 @@ name = "util"
 path = "_util.rs"
 ```
 
+**Note:** `Cargo.toml` must exist on the same level as the `.rs` files.
+
 ### Dependencies
 
 This Builder supports installing dependencies defined in the `Cargo.toml` file.
 
 Furthermore, more system dependencies can be installed at build time with the presence of a shell `build.sh` file in the same directory as the entrypoint file.
+
+## Local Development
+
+With `vercel dev` and `@vercel/rust`, you can develop your Rust-based lamdas on your own machine.
+
+During local development with `vercel dev`, ensure `rust` and `cargo` are already installed and available in your `PATH`, since they will not be installed automatically. The recommended way to install `rust` and `cargo` on your machine is with [rustup](https://rustup.rs).
+
+## Contributing
+
+Since this project contains both Rust and Node.js code, you need to install the relevant dependencies. If you're only working on the JavaScript side, you only need to install those dependencies (and vice-versa).
+
+```sh
+# install node dependencies
+npm install
+
+# install cargo dependencies
+cargo fetch
+```
 
 ## FAQ
 
@@ -90,24 +106,6 @@ Unfortunately, the AWS Lambda Runtime for Rust relies (tangentially) on `proc_ma
 For more information, please see [this issue](https://github.com/mike-engel/vercel-rust/issues/2).
 
 </details>
-
-### Local Development
-
-With `vercel dev` and `@vercel/rust`, you can develop your Rust-based lamdas on your own machine.
-
-During local development with `vercel dev`, ensure `rust` and `cargo` are already installed and available in your `PATH`, since they will not be installed automatically. The recommended way to install `rust` and `cargo` on your machine is with [rustup](https://rustup.rs).
-
-### Contributing
-
-Since this project contains both Rust and Node.js code, you need to install the relevant dependencies. If you're only working on the JavaScript side, you only need to install those dependencies (and vice-versa).
-
-```sh
-# install node dependencies
-npm install
-
-# install cargo dependencies
-cargo fetch
-```
 
 ## Contributors
 
